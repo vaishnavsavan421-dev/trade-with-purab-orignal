@@ -7,6 +7,21 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
+<!-- ✅ Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '25905653712401231');
+fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel Code -->
+
 <style>
 *{
   margin:0;
@@ -25,7 +40,7 @@ body{
   overflow:hidden;
 }
 
-/* ❄️ Snow Canvas */
+/* Snow Canvas */
 canvas{
   position:fixed;
   top:0;
@@ -35,7 +50,7 @@ canvas{
   z-index:0;
 }
 
-/* 🔥 Glow Box */
+/* Glow Box */
 .glow-box{
   position:relative;
   width:90%;
@@ -69,7 +84,6 @@ canvas{
   100%{background-position:300% 50%}
 }
 
-/* Logo */
 .logo{
   width:90px;
   height:90px;
@@ -85,21 +99,18 @@ canvas{
   object-fit:cover;
 }
 
-/* Headline */
 h1{
   font-size:28px;
   font-weight:700;
   margin-bottom:6px;
 }
 
-/* Sub */
 .sub{
   font-size:14px;
   color:#00ffb3;
   margin-bottom:15px;
 }
 
-/* Info */
 .info{
   font-size:14px;
   color:#cfd3ff;
@@ -107,7 +118,6 @@ h1{
   margin-bottom:25px;
 }
 
-/* Button */
 .cta{
   display:inline-block;
   padding:14px 34px;
@@ -135,11 +145,16 @@ h1{
 
 <body>
 
-<!-- ❄️ Snow -->
+<!-- ✅ Meta Pixel Noscript -->
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=25905653712401231&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Noscript -->
+
 <canvas id="snow"></canvas>
 
 <div class="glow-box">
-
   <div class="logo">
     <img src="logo.png" alt="Trade With Purab">
   </div>
@@ -153,13 +168,11 @@ h1{
     not hype or unrealistic promises.
   </div>
 
-  <a href="https://t.me/+RembN8QvT8QyY2M1" target="_blank" class="cta">
+  <a href="https://t.me/yourtelegramlink" target="_blank" class="cta">
     Join Free Telegram Channel
   </a>
-
 </div>
 
-<!-- ❄️ Snowfall Script -->
 <script>
 const canvas = document.getElementById("snow");
 const ctx = canvas.getContext("2d");
@@ -167,14 +180,13 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let flakes = [];
-
+let flakes=[];
 for(let i=0;i<120;i++){
   flakes.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    r: Math.random()*3+1,
-    d: Math.random()+1
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*3+1,
+    d:Math.random()+1
   });
 }
 
@@ -182,35 +194,29 @@ function drawSnow(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle="rgba(255,255,255,0.8)";
   ctx.beginPath();
-  for(let i=0;i<flakes.length;i++){
-    let f = flakes[i];
+  flakes.forEach(f=>{
     ctx.moveTo(f.x,f.y);
     ctx.arc(f.x,f.y,f.r,0,Math.PI*2,true);
-  }
+  });
   ctx.fill();
   moveSnow();
 }
 
 function moveSnow(){
-  for(let i=0;i<flakes.length;i++){
-    let f = flakes[i];
-    f.y += Math.pow(f.d,2) + 1;
-    if(f.y > canvas.height){
-      flakes[i] = {
-        x: Math.random()*canvas.width,
-        y: 0,
-        r: f.r,
-        d: f.d
-      };
+  flakes.forEach(f=>{
+    f.y+=Math.pow(f.d,2)+1;
+    if(f.y>canvas.height){
+      f.y=0;
+      f.x=Math.random()*canvas.width;
     }
-  }
+  });
 }
 
-setInterval(drawSnow, 30);
+setInterval(drawSnow,30);
 
 window.addEventListener("resize",()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
 });
 </script>
 
