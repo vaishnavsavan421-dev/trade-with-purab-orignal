@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade With Purab ™</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:#050816;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  overflow:hidden;
+}
+
+/* ❄️ Snow Canvas */
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+
+/* 🔥 Glow Box */
+.glow-box{
+  position:relative;
+  width:90%;
+  max-width:420px;
+  padding:40px 25px;
+  border-radius:22px;
+  background:#0b1022;
+  text-align:center;
+  z-index:2;
+}
+
+.glow-box::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:22px;
+  background:linear-gradient(
+    90deg,
+    #00f2ff,
+    #00ff9c,
+    #ff00ff,
+    #00f2ff
+  );
+  background-size:300% 300%;
+  animation:borderGlow 6s linear infinite;
+  z-index:-1;
+}
+
+@keyframes borderGlow{
+  0%{background-position:0% 50%}
+  100%{background-position:300% 50%}
+}
+
+/* Logo */
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  overflow:hidden;
+  margin:0 auto 15px;
+  border:3px solid #00f2ff;
+}
+
+.logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Headline */
+h1{
+  font-size:28px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+/* Sub */
+.sub{
+  font-size:14px;
+  color:#00ffb3;
+  margin-bottom:15px;
+}
+
+/* Info */
+.info{
+  font-size:14px;
+  color:#cfd3ff;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+
+/* Button */
+.cta{
+  display:inline-block;
+  padding:14px 34px;
+  border-radius:50px;
+  font-weight:600;
+  text-decoration:none;
+  color:#000;
+  background:linear-gradient(
+    90deg,
+    #00ffb3,
+    #00c3ff,
+    #ff00ff,
+    #00ffb3
+  );
+  background-size:300% 300%;
+  animation:btnGlow 4s linear infinite;
+}
+
+@keyframes btnGlow{
+  0%{background-position:0% 50%}
+  100%{background-position:300% 50%}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ❄️ Snow -->
+<canvas id="snow"></canvas>
+
+<div class="glow-box">
+
+  <div class="logo">
+    <img src="logo.png" alt="Trade With Purab">
+  </div>
+
+  <h1>TRADE WITH PURAB ™</h1>
+  <div class="sub">30,000+ Active Traders</div>
+
+  <div class="info">
+    A focused trading community for serious market learners.
+    We prioritize discipline, risk management and clarity —
+    not hype or unrealistic promises.
+  </div>
+
+  <a href="https://t.me/yourtelegramlink" target="_blank" class="cta">
+    Join Free Telegram Channel
+  </a>
+
+</div>
+
+<!-- ❄️ Snowfall Script -->
+<script>
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let flakes = [];
+
+for(let i=0;i<120;i++){
+  flakes.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    r: Math.random()*3+1,
+    d: Math.random()+1
+  });
+}
+
+function drawSnow(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(255,255,255,0.8)";
+  ctx.beginPath();
+  for(let i=0;i<flakes.length;i++){
+    let f = flakes[i];
+    ctx.moveTo(f.x,f.y);
+    ctx.arc(f.x,f.y,f.r,0,Math.PI*2,true);
+  }
+  ctx.fill();
+  moveSnow();
+}
+
+function moveSnow(){
+  for(let i=0;i<flakes.length;i++){
+    let f = flakes[i];
+    f.y += Math.pow(f.d,2) + 1;
+    if(f.y > canvas.height){
+      flakes[i] = {
+        x: Math.random()*canvas.width,
+        y: 0,
+        r: f.r,
+        d: f.d
+      };
+    }
+  }
+}
+
+setInterval(drawSnow, 30);
+
+window.addEventListener("resize",()=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
